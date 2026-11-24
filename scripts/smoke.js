@@ -68,6 +68,11 @@ class Client {
     });
   }
 
+  /** Drop everything received so far: the next wait() only sees fresh messages. */
+  skipBuffered() {
+    this.cursor = this.msgs.length;
+  }
+
   send(obj) {
     this.ws.send(JSON.stringify(obj));
   }
@@ -125,6 +130,11 @@ async function main() {
   def2.send({ t: 'soul', x: 120, y: 150 });
 
   console.log('# MERCY ends the battle');
+  // the dodge stream keeps both clients busy: ignore states already buffered, or a
+  // stale "menu" from the earlier turn answers this wait and MERCY goes to the
+  // wrong player (rejected, battle never ends).
+  a.skipBuffered();
+  b.skipBuffered();
   const third = await a.wait(isState((s) => s.phase === 'menu'), 12000);
   const ma = third.s.turn === ida ? a : b;
   ma.send({ t: 'battle', a: { type: 'mercy' } });
