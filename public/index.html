@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#000000" />
+    <title>HOMETOWN CLASH — UNDERTALE PvP fan game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="game">
+      <button id="fsBtn" title="Fullscreen">⛶ FULLSCREEN</button>
+
+      <!-- ================= NAME (no login) ================= -->
+      <section id="join" class="screen show">
+        <div class="card">
+          <h1>HOMETOWN<span>CLASH</span></h1>
+          <p class="tagline">* You feel like you're going to have a bad time.</p>
+          <label class="field">
+            <span>YOUR NAME</span>
+            <input id="nameInput" maxlength="12" placeholder="JEVIL" autocomplete="off" spellcheck="false" />
+          </label>
+          <button id="joinBtn" class="btn">ENTER</button>
+          <p id="joinError" class="err"></p>
+          <p class="legal">
+            Free, non-commercial fan project. UNDERTALE &amp; DELTARUNE are &copy; Toby Fox.
+            All art here is drawn in code.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= SELECT ================= -->
+      <section id="select" class="screen">
+        <header id="topBar">
+          <div class="brandSmall">HOMETOWN CLASH</div>
+          <div id="onlineCount">1 online</div>
+        </header>
+
+        <div id="selectInner">
+          <div class="panel" id="charPanel">
+            <h2>CHOOSE YOUR CHARACTER</h2>
+            <div id="charCard" class="charCard">
+              <div id="charArt" class="charArt"></div>
+              <div class="charName">JEVIL</div>
+              <div class="charTag">SELECTED</div>
+            </div>
+            <div id="frameBtns" class="frameBtns">
+              <button class="poseBtn on" data-pose="idle">IDLE&nbsp;x4</button>
+              <button class="poseBtn" data-pose="walk">WALK&nbsp;x4</button>
+              <button class="poseBtn" data-pose="jump">JUMP&nbsp;x4</button>
+            </div>
+            <p class="note">* Jevil is the only character for now.</p>
+          </div>
+
+          <div class="panel" id="foePanel">
+            <h2>CHOOSE SOMEONE TO FIGHT</h2>
+            <ul id="foeList"></ul>
+            <p id="foeEmpty" class="empty">
+              * Nobody else is here yet.<br />
+              Open this page in another tab to test a battle.
+            </p>
+          </div>
+        </div>
+
+        <p id="selectHint">Tap a name to start the battle.</p>
+      </section>
+
+      <!-- ================= BATTLE (Undertale UI) ================= -->
+      <section id="battle" class="screen">
+        <div id="battleInner">
+          <div id="turnTag">...</div>
+
+          <div id="enemyRow">
+            <div id="foeName">JEVIL</div>
+            <div id="foeHpWrap"><div id="foeHpBar"></div></div>
+            <div id="foeSprite"></div>
+          </div>
+
+          <div id="box">
+            <p id="battleText"></p>
+            <div id="fieldWrap">
+              <canvas id="field" width="620" height="200"></canvas>
+              <div id="soul" class="hidden">♥</div>
+              <div id="aimArrow" class="hidden"></div>
+            </div>
+          </div>
+
+          <div id="playerBar">
+            <span id="meName">JEVIL</span>
+            <span class="lv">LV 1</span>
+            <span class="hpLabel">HP</span>
+            <div id="hpTrack"><div id="hpFill"></div></div>
+            <span id="hpText">100 / 100</span>
+            <span id="itemsLeft">CANDY x2</span>
+          </div>
+
+          <div id="menus">
+            <div id="mainMenu">
+              <button class="choice" data-act="fight">FIGHT</button>
+              <button class="choice" data-act="act">ACT</button>
+              <button class="choice" data-act="item">ITEM</button>
+              <button class="choice" data-act="mercy">MERCY</button>
+            </div>
+
+            <div id="attackMenu" class="hidden">
+              <div id="attackHeader">* JEVIL'S ATTACKS</div>
+              <div id="attackList"></div>
+              <p id="attackDesc"></p>
+              <button id="attackBack" class="small">BACK</button>
+            </div>
+
+            <div id="fightWrap" class="hidden">
+              <div id="fightLabel">* Press when the line hits the middle!</div>
+              <div id="fightTrack"><div id="fightZone"></div><div id="fightNeedle"></div></div>
+              <button id="fightStop" class="small">STRIKE</button>
+            </div>
+
+            <div id="aimBar" class="hidden">
+              <div id="aimLabel">* Aim, then press FIRE.</div>
+              <button id="fireBtn" class="btn">FIRE</button>
+              <button id="aimBack" class="small">BACK</button>
+            </div>
+          </div>
+
+          <div id="endOverlay" class="hidden">
+            <h2 id="endTitle">...</h2>
+            <p id="endText"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- joystick: soul movement in battle + aiming -->
+      <div id="stick">
+        <div id="stickBase"><div id="stickKnob"></div></div>
+      </div>
+
+      <!-- landscape hint (touch devices only) -->
+      <div id="rotate">
+        <div class="rotIcon">⟳</div>
+        <p>TURN YOUR PHONE SIDEWAYS</p>
+        <span>Hometown Clash is played in landscape.</span>
+        <button id="rotateSkip" class="small">CONTINUE ANYWAY</button>
+      </div>
+    </div>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
