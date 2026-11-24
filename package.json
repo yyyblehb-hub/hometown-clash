@@ -1,0 +1,15 @@
+{
+  "name": "hometown-clash",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Non-commercial UNDERTALE fan game: Hometown lobby + turn-based Jevil PvP battles.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
